@@ -13,7 +13,7 @@ from endia.functional import ge_zero
 ####-----------------------------------------------------------------------------------------------------------------####
 
 
-struct Relu(DifferentiableUnaryOp):
+struct ReLU(DifferentiableUnaryOp):
     @staticmethod
     fn fwd(arg0: Array) raises -> Array:
         """Computes the rectified linear unit (ReLU) of the input array element-wise.
@@ -40,7 +40,7 @@ struct Relu(DifferentiableUnaryOp):
             raise "ReLU function does not support complex arguments."
 
         return unary_op_array(
-            arg0, "relu", Relu.__call__, Relu.jvp, Relu.vjp, Relu.unary_simd_op
+            arg0, "relu", ReLU.__call__, ReLU.jvp, ReLU.vjp, ReLU.unary_simd_op
         )
 
     @staticmethod
@@ -144,4 +144,4 @@ fn relu(arg0: Array) raises -> Array:
     - Automatic differentiation (forward and reverse modes).
     - Complex valued arguments.
     """
-    return Relu.fwd(arg0)
+    return ReLU.fwd(arg0)
